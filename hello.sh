@@ -1,2 +1,2 @@
 #!/bin/sh
-echo "Hello TEAM CHOCOLATINE !!!"
+echo "Hello TEAM CHOCOLATINE"
