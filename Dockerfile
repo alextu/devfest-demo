@@ -1,0 +1,2 @@
+FROM REGISTRY/alpine
+CMD ["echo TEAM CHOCOLATINE!!!"]
