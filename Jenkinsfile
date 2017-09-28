@@ -2,17 +2,17 @@ def artifactoryRegistry = 'nginx.default:5000'
 podTemplate(label: 'docker-pod', containers: [
     containerTemplate(
         name: 'dind', 
-        image: 'docker:17.09.0-ce-dind', 
+        image: 'docker:dind', 
         ttyEnabled: true, 
         privileged: true,
-        args: "--tls=false --insecure-registry=$artifactoryRegistry"
+        alwaysPullImage: true,
+        command: 'dockerd',
+        args: "--host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay --tls=false --insecure-registry=$artifactoryRegistry"
     )]
   ) {
 
     node('docker-pod') {
         container('dind') {
-            
-
             stage('Git clone') {
                 git url: 'https://github.com/alextu/devfest-demo.git'
             }
